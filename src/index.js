@@ -1,13 +1,10 @@
-'use strict';
-import express, { response } from 'express';
+import 'dotenv/config';
+import './baseDeDatos.js';
+import servidor from './servidor.js';
 
-const servidor = express();
-const puerto = 3000;
+const puerto = servidor.get('port');
 
-servidor.get('/', (request, response) => {
-    response.json({ message: 'WORKS!!!' });
-});
-
-servidor.listen (puerto, () => {
+servidor.listen(puerto, () => {
     console.log(`Servidor Ejecutandose en el puerto: ${puerto}`);
 });
+
