@@ -26,17 +26,38 @@ const ControladorLista = {
     leerLista: async (request, response) => {
         try{
             const todasLasListas = await modelosLista.find();
-            response.json({ message: "todas las listas", todasLasListas});
+            response.json({ 
+                resultado: 'hecho',
+                message: "todas las listas", 
+                datos: todasLasListas
+            });
         } catch (error){
-            response.json({ message: "Ocurrio un error"});
+            response.json({ 
+                resultado: 'Error',
+                mensaje: 'Ocurrio un error',
+                datos: null,
+            });
         }
     },
     leerListaCopia: async (request, response) => {
         try{
             const Lista = await modelosLista.findById(request.params.id);
-            response.json({ message: "lista", Lista});
+            response.json({ 
+                resultado: "hecho",
+                message: "Una lista hecho", 
+                dato: {
+                    id: Lista._id,
+                    nombre: Lista.nombre,
+                    apellido: Lista.apellido,
+                    entregado: Lista.entregado
+                }
+                });
         } catch (error){
-            response.json({ message: "Ocurrio un error"});
+            response.json({ 
+                resultado: 'Error',
+                mensaje: 'Ocurrio un error',
+                datos: null,
+            });
         }
     },
     actualizarLista: async (request, response) => {
@@ -45,10 +66,18 @@ const ControladorLista = {
                 request.params.id,
                 request.body
             );
-            response.json({ message: "Lista Actualizada", actualizado});
+            response.json({ 
+                resultado: "hecho",
+                message: "Lista Actualizada", 
+                dato: actualizado._id
+            });
 
         } catch (error){
-            response.json({ message: "Ocurrios un error"});
+            response.json({ 
+                resultado: 'Error',
+                mensaje: 'Ocurrio un error',
+                datos: null,
+            });
         }
     },
     eliminarLista: async (request, response) => {
@@ -56,9 +85,17 @@ const ControladorLista = {
             const elimimado = await modelosLista.findByIdAndDelete(
                 request.params.id
             );
-            response.json({ message: "Lista Eliminado"})
+            response.json({ 
+                resultado: "Eliminado",
+                message: "Lista Eliminado",
+                datos: elimimado._id
+            });
         } catch (error) {
-            response.json({})
+            response.json({
+                resultado: 'Error',
+                mensaje: 'Ocurrio un error',
+                datos: null,
+            })
         }
       
     },
