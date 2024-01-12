@@ -3,7 +3,10 @@ import {Schema, model} from 'mongoose';
 const esquemalista = new Schema({
     nombre: {type: String, required: true},
     apellido: {type: String, required: true},
-    entregado: {type: Boolean, required: true},
+    correo: {type: String, required: true},
+    tefedono: {type: Number, required: true},
+    mayorEdad: {type: Boolean, required: true}
+
 }, 
 {versionKey: false, timestamps: true }
 );
